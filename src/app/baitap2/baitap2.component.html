@@ -1,0 +1,41 @@
+<div>
+  <div class="container">
+    <h1>Bài tập structural directive</h1>
+    <div class="border">
+      <p style="background-color: black; color: white; padding: 10px 20px; font-size: 20px">Quản lý danh mục sản phẩm</p>
+      <div style="width:80%; margin: 0 auto">
+        <input type="text" placeholder="Mã sản phẩm" style="margin-right: 20px" #masp>
+        <input type="text" placeholder="Tên sản phẩm" style="margin-right: 20px"#tensp>
+        <input type="text" placeholder="Giá sản phẩm" style="margin-right: 20px"#gia>
+        <button class="btn btn-success" (click)="ThemSanPham(masp.value,tensp.value,gia.value)">THÊM SẢN PHẨM</button>
+      </div>
+    </div> 
+    <div class="border mt-5">
+      <p style="background-color: black; color: white; padding: 10px 20px; font-size: 20px">Danh mục sản phẩm</p>
+      <div class="tblNguoiDung" id="tblNguoiDung">
+        <!-- BEGIN TABLE NGƯỜI DÙNG -->
+        <table class="table table-bordered">
+          <thead>
+            <th>MÃ SẢN PHẨM</th>
+            <th>TÊN SẢN PHẨM</th>
+            <th>GIÁ</th>
+            <th>CHỨC NĂNG</th> 
+          </thead>
+          <tbody *ngFor = "let item of SanPham | paginate: { itemsPerPage: 10, currentPage: p }">
+            <tr>
+                <td>{{item.MaSP}}</td>
+                <td>{{item.TenSP}}</td>
+                <td>{{item.Gia}}</td>
+                <td> 
+                  <button class="btn btn-danger" (click)=XoaSanPham(item.MaSP)>XÓA</button> 
+                </td>
+            </tr>
+            
+          </tbody>
+        </table> 
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <!-- END TABLE NGƯỜI DÙNG -->
+      </div>
+    </div>
+  </div>
+</div>
